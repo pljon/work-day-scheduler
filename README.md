@@ -23,4 +23,4 @@ https://pljon.github.io/work-day-scheduler/
 
 ## Screenshot
 
-![website screenshot](./assets/images/quiz.gif)
+![website screenshot](./assets/images/work-scheduler.gif)
