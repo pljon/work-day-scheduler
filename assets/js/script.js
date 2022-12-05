@@ -21,21 +21,22 @@ var todayHours = Array.from(new Array(24)).map((v, i) => {
 // if true, assign past
 // else if false (time is greater), assign future
 
-
 function color(time) {
   // return <parameter>
   return time.text === currentTime.text 
   // ternary operators
-  // <to do if false> ? <to do if true>
-  // 
+  // parameter is left of ? , which is time.text === currentTime.text, true in this case
   ? "present"
+  // : similar to else if followed by new parameter
   : time.hour < today
+  // since true to time.hour < hour, inputs value
   ? "past"
+  // since false, adds this value
   : "future";
 }
 
 
-// For each hour in todayHours array, create grid with id in text format (ln. 10)
+// For each hour in todayHours array, create grid with id in text format (ln. 12)
 // forEach creates new divs
 $(function () {
   todayHours.forEach((hr) => {
@@ -48,6 +49,7 @@ $(function () {
     );
     // Name set to hr.text so inputted text can be referenced when 
     // saving /  getting to / from localstorage
+    // ${color(hr)} adds present, past, future according to function color(time) see ln. 25
     var textArea = $(
       `<textarea name="${hr.text}" class="col-8 col-md-10 description ${color(hr)}" rows="3">${store.getItem(hr.text) || ""}</textarea>`
     );
@@ -63,7 +65,6 @@ $(function () {
       e.preventDefault();
       // value represents the text value in text area element
       // saves to localstorage as hr.text which can be pulled from localstorage
-      // in line 44 text area element
       var value = $(`textarea[name="${hr.text}"]`).val();
       store.setItem(hr.text, value);
     })
@@ -76,27 +77,3 @@ $(function () {
     
   });
 });
-
-
-
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
